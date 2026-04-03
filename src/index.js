@@ -14,17 +14,17 @@ app.get('/', (req, res) => {
 
 connectDB()
 .then(() => {
-    app.on("error", (error) => {
+    
+    const PORT = process.env.PORT || 8080;
+    
+    const server = app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+    
+    server.on("error", (error) => {
         console.error("Server error:", error);
         process.exit(1);
     })
-    
-    const PORT = process.env.PORT || 8080;
-
-    app.listen(PORT, () => {
-        console.log(`Server running at http://localhost:${PORT}`);
-    });
-
 })
 .catch((error) => {
     console.log("MongoDB Connection failed !!!", error);

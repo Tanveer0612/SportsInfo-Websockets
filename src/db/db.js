@@ -8,6 +8,10 @@ if(!process.env.DATABASE_URL){
     throw new Error("Database url is not defined");
 }
 
+if(!process.env.MONGODB_URI){
+    throw new Error("MongoDB URI is not defined");
+}
+
 export const pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL
 })
@@ -15,7 +19,6 @@ export const pool = new pg.Pool({
 export const db = drizzle(pool);
 
 const connectDB = async () => {
-    console.log(process.env.MONGODB_URI);
     try {
         const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}`);
         console.log(`MONGODB CONNECTED SUCCESSFULLY !!! DB HOST : ${connectionInstance.connection.host}`);
