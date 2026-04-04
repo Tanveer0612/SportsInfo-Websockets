@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
     res.send("Hello From express server!");
 })
 
+import matchRouter from "./routes/match.routes.js";
+
+app.use("/api/v1/match", matchRouter);
+
 connectDB()
 .then(() => {
     

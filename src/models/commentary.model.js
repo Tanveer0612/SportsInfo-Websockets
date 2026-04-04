@@ -53,4 +53,4 @@ const commentarySchema = new mongoose.Schema(
     },
 );
 
-export const Commentary = mongoose.model("Commentary", commentarySchema);
+export const CommentaryModel = mongoose.model("Commentary", commentarySchema);
