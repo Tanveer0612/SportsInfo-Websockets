@@ -19,9 +19,13 @@ export const createMatch = async (req, res) => {
             status: getMatchStatus(startTime, endTime) 
         })
 
+        if(res.app.locals.broadcastMatchCreated) {
+            res.app.locals.broadcastMatchCreated(match);
+        }
+
         res.status(201).json({match, message: "Match Created Successfully"})
     } catch (error) {
-        res.status(500).json({error: "Error while creating match", details: error})
+        res.status(500).json({error: "Error while creating match", details: error.message})
     }
 }
 
