@@ -1,4 +1,5 @@
 import { z } from "zod";
+import mongoose from "mongoose";
 
 /**
  * MATCH STATUS CONSTANT
@@ -20,7 +21,10 @@ export const listMatchesQuerySchema = z.object({
  * MATCH ID PARAM SCHEMA
  */
 export const matchIdParamSchema = z.object({
-    id: z.coerce.number().int().positive(),
+    id: z.string().refine(
+        (val) => mongoose.Types.ObjectId.isValid(val),
+        { message: "Invalid matchId" }
+    )
 });
 
 /**

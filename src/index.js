@@ -16,15 +16,18 @@ app.get('/', (req, res) => {
 })
 
 import matchRouter from "./routes/match.routes.js";
+import commentaryRouter from "./routes/commentary.routes.js";
+
 app.use("/api/v1/match", matchRouter);
+app.use("/api/v1/commentary", commentaryRouter);
 
 
-const {broadcastMatchCreated} =  attachWebsocketServer(server);
+const { broadcastMatchCreated, broadcastCommentary } =  attachWebsocketServer(server);
 app.locals.broadcastMatchCreated = broadcastMatchCreated;
+app.locals.broadcastCommentary = broadcastCommentary;
 
 connectDB()
 .then(() => {
-    
     const PORT = process.env.PORT || 8080;
     const HOST = process.env.HOST || '0.0.0.0';
 
